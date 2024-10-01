@@ -2,6 +2,7 @@
 import ListaPresupuesto from '@/Components/ListaPresupuestos';
 import AgregarPresupuesto from '@/Components/AgregarPresupuesto';
 import { Head } from '@inertiajs/inertia-react';
+import AgregarTransaccion from '@/Components/AgregarTransacciones';
 
 
 export default function Welcome({ presupuesto }) {
@@ -12,6 +13,7 @@ export default function Welcome({ presupuesto }) {
 
             <ListaPresupuesto/> 
             <AgregarPresupuesto/>
+     
             
         </>
     );

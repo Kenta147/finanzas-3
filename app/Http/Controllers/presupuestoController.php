@@ -47,11 +47,15 @@ class presupuestoController extends Controller
     public function show($id)
     {
 
-        $presupuesto = Presupuesto::findOrFail($id);
+   
+    $presupuesto = Presupuesto::findOrFail($id);
     
-        return Inertia::render('Transacciones', [
-            'presupuesto' => $presupuesto,
-        ]);
+    return Inertia::render('Transacciones', [
+        'presupuesto' => $presupuesto,
+        'presupuestoId' => $presupuesto->id,  // Aquí pasamos el id de forma explícita
+    ]);
+
+
     }
 
     /**

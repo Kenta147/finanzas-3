@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/inertia-react';
 const ListaTransacciones = () => {
     const { transacciones, presupuestoId } = usePage().props;
     const transaccionesList = transacciones || [];
-    console.log(transaccionesList);
+  
 
     return (
         <div>

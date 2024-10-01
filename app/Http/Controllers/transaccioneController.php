@@ -13,7 +13,7 @@ class transaccioneController extends Controller
      */
     public function index()
     {
-        $transacciones = Transaccion::where('presupuesto_id', $presupuestoId)->get();
+        $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
 
        
         return Inertia::render('ListaTransacciones', [
@@ -43,8 +43,11 @@ class transaccioneController extends Controller
             'presupuesto_id' => 'required|exists:presupuestos,id',
         ]);
 
-        $transaccion = Transaccion::create($request->all());
-        return response()->json($transaccion, 201);
+  
+        $transaccion = transaccione::create($request->all());
+
+      
+        return redirect()->back()->with('success', 'Transacción creada exitosamente.');
     }
 
     /**
@@ -53,8 +56,8 @@ class transaccioneController extends Controller
     public function show($id)
     {
        
-            $transacciones = Transaccion::where('presupuesto_id', $id)->get();
-            dd($transacciones); // Esto detendrá la ejecución y mostrará las transacciones
+            $transacciones = transaccione::where('presupuesto_id', $id)->get();
+            dd($transacciones); 
             return Inertia::render('Transacciones', [
                 'transacciones' => $transacciones,
                 'presupuestoId' => $id,
@@ -84,7 +87,7 @@ class transaccioneController extends Controller
      */
     public function destroy($id)
     {
-        $transaccion = Transaccion::findOrFail($id);
+        $transaccion = transaccione::findOrFail($id);
         $transaccion->delete();
         return response()->json(null, 204);
     }
