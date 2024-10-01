@@ -35,6 +35,8 @@ class presupuestoController extends Controller
             'monto' => 'required|numeric',
             'mes' => 'required|integer|min:1|max:12',
             'ano' => 'required|integer',
+
+            
         ]);
 
         $presupuesto = Presupuesto::create($request->all());

@@ -19,6 +19,8 @@ class transaccioneController extends Controller
         return Inertia::render('ListaTransacciones', [
             'transacciones' => $transacciones,
             'presupuestoId' => $presupuestoId, 
+
+            
         ]);
     }
 
