@@ -7,13 +7,19 @@ const grafico = () => {
     const [transacciones, setTransacciones] = useState([]);
 
     useEffect(() => {
-        // Obtener transacciones desde la API
         const fetchTransacciones = async () => {
-            const response = await fetch(`/transacciones/${presupuestoId}`);
-            const data = await response.json();
-            setTransacciones(data);
+            try {
+                const response = await fetch(`/presupuesto/${presupuestoId}`);
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                setTransacciones(data);
+            } catch (error) {
+                // console.error("Error fetching transacciones:", error);
+            }
         };
-
+    
         fetchTransacciones();
     }, [presupuestoId]);
 

@@ -50,13 +50,14 @@ class transaccioneController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
-    {
-        $transacciones = Transaccione::where('presupuesto_id', $id)->get();
-        return response()->json($transacciones);
-    
-      
-    }
+    public function show($presupuestoId)
+{
+    $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
+
+ 
+    return response()->json($transacciones);
+}
+
     
     
 
@@ -90,6 +91,6 @@ class transaccioneController extends Controller
 
     $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
 
-    return response()->json($transacciones); // Retornar como JSON
+    return response()->json($transacciones); 
 }
 }
