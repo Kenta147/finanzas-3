@@ -15,63 +15,63 @@ const AgregarTransaccion = ({ presupuestoId }) => {
             monto,
             descripcion,
             fecha,
-            presupuesto_id: presupuestoId, 
+            presupuesto_id: presupuestoId,
         });
     };
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-            <h2 className="text-xl mb-4">Agregar Transacción</h2>
+        <form onSubmit={handleSubmit} className="container mt-4">
+            <h2 className="text-center mb-4">Agregar Transacción</h2>
             
-            <div className="mb-4">
-                <label htmlFor="tipo" className="block mb-1">Tipo de Transacción</label>
+            <div className="mb-3">
+                <label htmlFor="tipo" className="form-label">Tipo de Transacción</label>
                 <select 
                     id="tipo" 
                     value={tipo} 
                     onChange={(e) => setTipo(e.target.value)}
-                    className="w-full border p-2"
+                    className="form-select"
                 >
                     <option value="ingreso">Ingreso</option>
                     <option value="gasto">Gasto</option>
                 </select>
             </div>
             
-            <div className="mb-4">
-                <label htmlFor="monto" className="block mb-1">Monto</label>
+            <div className="mb-3">
+                <label htmlFor="monto" className="form-label">Monto</label>
                 <input 
                     type="number" 
                     id="monto" 
                     value={monto} 
                     onChange={(e) => setMonto(e.target.value)}
-                    className="w-full border p-2"
+                    className="form-control"
                     required 
                 />
             </div>
             
-            <div className="mb-4">
-                <label htmlFor="descripcion" className="block mb-1">Descripción</label>
+            <div className="mb-3">
+                <label htmlFor="descripcion" className="form-label">Descripción</label>
                 <input 
                     type="text" 
                     id="descripcion" 
                     value={descripcion} 
                     onChange={(e) => setDescripcion(e.target.value)}
-                    className="w-full border p-2"
+                    className="form-control"
                 />
             </div>
             
-            <div className="mb-4">
-                <label htmlFor="fecha" className="block mb-1">Fecha</label>
+            <div className="mb-3">
+                <label htmlFor="fecha" className="form-label">Fecha</label>
                 <input 
                     type="date" 
                     id="fecha" 
                     value={fecha} 
                     onChange={(e) => setFecha(e.target.value)}
-                    className="w-full border p-2"
+                    className="form-control"
                     required 
                 />
             </div>
             
-            <button type="submit" className="bg-blue-500 text-white p-2 rounded">Agregar Transacción</button>
+            <button type="submit" className="btn btn-primary w-100">Agregar Transacción</button>
         </form>
     );
 };
