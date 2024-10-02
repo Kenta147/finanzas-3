@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\transaccione;
+use App\Models\Transaccione;
 use App\Http\Requests\StoretransaccioneRequest;
 use App\Http\Requests\UpdatetransaccioneRequest;
 use Illuminate\Http\Request;
-class transaccioneController extends Controller
+
+class TransaccioneController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
-
-       
-        // return Inertia::render('ListaTransacciones', [ 'transacciones' => $transacciones, ]);
+        return response()->json(transaccione::all());
     }
 
     /**
@@ -40,10 +38,10 @@ class transaccioneController extends Controller
             'presupuesto_id' => 'required|exists:presupuestos,id',
         ]);
 
-  
+
         $transaccion = transaccione::create($request->all());
 
-      
+
         return redirect()->back()->with('success', 'Transacción creada exitosamente.');
     }
 
@@ -51,15 +49,15 @@ class transaccioneController extends Controller
      * Display the specified resource.
      */
     public function show($presupuestoId)
-{
-    $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
+    {
+        $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
 
- 
-    return response()->json($transacciones);
-}
 
-    
-    
+        return response()->json($transacciones);
+    }
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -87,10 +85,10 @@ class transaccioneController extends Controller
         return response()->json(null, 204);
     }
     public function getTransacciones($presupuestoId)
-{
+    {
 
-    $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
+        $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
 
-    return response()->json($transacciones); 
-}
+        return response()->json($transacciones);
+    }
 }

@@ -1,25 +1,45 @@
-import React from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import React, { useEffect, useState } from "react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
-// Procesar los datos para el gráfico
-const data = [
-    { name: "A", value: 12 },
-    { name: "B", value: 18 },
-    { name: "C", value: 22 },
-    { name: "D", value: 30 },
-];
+const TransaccionesPorAno = () => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-const SimpleGraficoBarras = () => {
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("http://localhost:8000/api/transacciones"); // URL de tu API de Laravel
+                if (!response.ok) {
+                    throw new Error("Error al obtener los datos");
+                }
+                const result = await response.json();
+                setData(result);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (loading) return <p>Cargando datos...</p>;
+    if (error) return <p>{error}</p>;
+
     return (
-        <BarChart width={500} height={300} data={data}>
-            <CartesianGrid stroke="#f5f5f5" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="value" fill="#8884d8" />
-        </BarChart>
+        <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="year" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="transactions" fill="#8884d8" />
+            </BarChart>
+        </ResponsiveContainer>
     );
 };
 
-export default SimpleGraficoBarras;
+export default TransaccionesPorAno;
