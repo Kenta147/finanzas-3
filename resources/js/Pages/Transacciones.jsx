@@ -15,7 +15,7 @@ const Transacciones = () => {
             <h1>Transacciones del Presupuesto {presupuestoId}</h1>
            
             <AgregarTransaccion presupuestoId={presupuestoId} />  
-            <ListaTransacciones presupuestoId={presupuestoId}/>
+           
         </div>
     );
 };
