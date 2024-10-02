@@ -3,6 +3,7 @@ import React from 'react';
 import AgregarTransaccion from '@/Components/AgregarTransacciones.jsx';
 import { usePage } from '@inertiajs/inertia-react';
 import ListaTransacciones from '@/Components/ListaTransacciones';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Grafico from '@/Components/Grafico';
 
 const Transacciones = () => {
