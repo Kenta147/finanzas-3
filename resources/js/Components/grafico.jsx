@@ -9,7 +9,7 @@ const TransaccionesPorAno = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("http://localhost:8000/api/transacciones"); // URL de tu API de Laravel
+                const response = await fetch("http://localhost:8000/api/transacciones/ordenadas-por-ano"); // Asegúrate de que esta URL es correcta
                 if (!response.ok) {
                     throw new Error("Error al obtener los datos");
                 }
@@ -36,7 +36,7 @@ const TransaccionesPorAno = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="transactions" fill="#8884d8" />
+                <Bar dataKey="total" fill="#8884d8" />
             </BarChart>
         </ResponsiveContainer>
     );

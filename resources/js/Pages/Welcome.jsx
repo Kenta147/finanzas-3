@@ -2,7 +2,7 @@ import ListaPresupuesto from '@/Components/ListaPresupuestos';
 import AgregarPresupuesto from '@/Components/AgregarPresupuesto';
 import { Head } from '@inertiajs/inertia-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Grafico from '@/Components/grafico';
+import Grafico from '@/Components/Grafico';
 import AgregarTransaccion from '@/Components/AgregarTransacciones';
 
 export default function Welcome({ presupuesto }) {

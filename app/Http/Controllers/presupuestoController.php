@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Models\presupuesto;
+use App\Models\Presupuesto;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorepresupuestoRequest;
 use App\Http\Requests\UpdatepresupuestoRequest;
 
-class presupuestoController extends Controller
+class PresupuestoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $presupuestos = presupuesto::all();
+        $presupuestos = Presupuesto::all();
 
         return Inertia::render("Components/ListaPresupuesto.jsx", ['presupuestos' => $presupuestos]);
     }
@@ -37,8 +37,6 @@ class presupuestoController extends Controller
             'monto' => 'required|numeric',
             'mes' => 'required|integer|min:1|max:12',
             'ano' => 'required|integer',
-
-
         ]);
 
         $presupuesto = Presupuesto::create($request->all());

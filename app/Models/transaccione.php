@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\presupuesto;
 
-class transaccione extends Model
+class Transaccione extends Model
 {
     use HasFactory;
 
@@ -18,9 +17,8 @@ class transaccione extends Model
         'presupuesto_id',
     ];
 
-
     public function presupuesto()
     {
-        return $this->belongsTo(presupuesto::class);
+        return $this->belongsTo(Presupuesto::class);
     }
 }

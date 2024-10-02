@@ -13,18 +13,13 @@ return new class extends Migration
     {
         Schema::create('transacciones', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipo',['ingreso','gasto']);
+            $table->enum('tipo', ['ingreso','gasto']);
             $table->decimal('monto',10,2);
-            $table->text('descripcion')->nullable;
+            $table->text('descripcion')->nullable();
             $table->date('fecha');
             $table->unsignedBigInteger('presupuesto_id');
             $table->foreign('presupuesto_id')->references('id')->on('presupuestos')->onDelete('cascade');
             $table->timestamps();
-
-
-
-
-           
         });
     }
 

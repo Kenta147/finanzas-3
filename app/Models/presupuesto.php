@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Models;
-use App\Models\transaccione;
+use App\Models\Transaccione;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class presupuesto extends Model
+class Presupuesto extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -16,6 +16,6 @@ class presupuesto extends Model
     ];
     public function transacciones()
     {
-        return $this->hasMany(transaccione::class, 'presupuesto_id'); // Relación
+        return $this->hasMany(Transaccione::class, 'presupuesto_id'); // Relación
     }
 }

@@ -3,30 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaccione;
-use App\Http\Requests\StoretransaccioneRequest;
-use App\Http\Requests\UpdatetransaccioneRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransaccioneController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of all transacciones.
      */
     public function index()
     {
-        return response()->json(transaccione::all());
+        return response()->json(Transaccione::all());
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Store a newly created transaccion in storage.
      */
     public function store(Request $request)
     {
@@ -38,56 +29,49 @@ class TransaccioneController extends Controller
             'presupuesto_id' => 'required|exists:presupuestos,id',
         ]);
 
+        $transaccion = Transaccione::create($request->all());
 
-        $transaccion = transaccione::create($request->all());
-
-
-        return redirect()->back()->with('success', 'Transacción creada exitosamente.');
+        return response()->json($transaccion, 201);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified transaccion.
      */
-    public function show($presupuestoId)
+    public function show($id)
     {
-        $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
-
-
-        return response()->json($transacciones);
+        $transaccion = Transaccione::findOrFail($id);
+        return response()->json($transaccion);
     }
 
-
-
-
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified transaccion in storage.
      */
-    public function edit(transaccione $transaccione)
+    public function update(Request $request, $id)
     {
-        //
+        $transaccion = Transaccione::findOrFail($id);
+        $transaccion->update($request->all());
+        return response()->json($transaccion);
     }
 
     /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatetransaccioneRequest $request, transaccione $transaccione)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * Remove the specified transaccion from storage.
      */
     public function destroy($id)
     {
-        $transaccion = transaccione::findOrFail($id);
+        $transaccion = Transaccione::findOrFail($id);
         $transaccion->delete();
         return response()->json(null, 204);
     }
-    public function getTransacciones($presupuestoId)
-    {
 
-        $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
+    /**
+     * Obtener transacciones ordenadas por año.
+     */
+    public function getTransaccionesOrdenadasPorAno()
+    {
+        $transacciones = Transaccione::select(DB::raw('YEAR(fecha) as year, COUNT(*) as total'))
+            ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->get();
 
         return response()->json($transacciones);
     }

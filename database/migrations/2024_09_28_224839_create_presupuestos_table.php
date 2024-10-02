@@ -16,7 +16,6 @@ return new class extends Migration
             $table->decimal('monto',10,2);
             $table->integer('mes');
             $table->integer('ano');
-           
             $table->timestamps();
         });
     }
