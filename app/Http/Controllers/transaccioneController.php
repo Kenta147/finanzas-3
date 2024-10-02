@@ -13,15 +13,10 @@ class transaccioneController extends Controller
      */
     public function index()
     {
-        $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
+        // $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
 
        
-        return Inertia::render('ListaTransacciones', [
-            'transacciones' => $transacciones,
-            'presupuestoId' => $presupuestoId, 
-
-            
-        ]);
+        // return Inertia::render('ListaTransacciones', [ 'transacciones' => $transacciones, ]);
     }
 
     /**
@@ -57,16 +52,13 @@ class transaccioneController extends Controller
      */
     public function show($id)
     {
-       
-            $transacciones = transaccione::where('presupuesto_id', $id)->get();
-            dd($transacciones); 
-            return Inertia::render('Transacciones', [
-                'transacciones' => $transacciones,
-                'presupuestoId' => $id,
-            ]);
-        
-        
+        $transacciones = Transaccione::where('presupuesto_id', $id)->get();
+        return response()->json($transacciones);
+    
+      
     }
+    
+    
 
     /**
      * Show the form for editing the specified resource.

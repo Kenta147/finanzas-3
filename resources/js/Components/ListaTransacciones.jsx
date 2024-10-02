@@ -1,39 +1,48 @@
-import React from "react";
-import { usePage } from '@inertiajs/inertia-react';
+import React, { useEffect, useState } from 'react';
 
-const ListaTransacciones = () => {
-    const { transacciones, presupuestoId } = usePage().props;
-    const transaccionesList = transacciones || [];
-  
+const ListaTransacciones = ({ presupuesto_id }) => {
+    const [transaction, setTransactions] = useState([]);
+
+    useEffect(() => {
+        const fetchTransactions = async () => {
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/presupuesto/${presupuesto_id}`);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                setTransactions(data);
+            } catch (error) {
+                console.error('Error fetching transactions:', error);
+            }
+        };
+
+        if (presupuesto_id) {
+            fetchTransactions();
+        }
+    }, [presupuesto_id]);
 
     return (
         <div>
-            <h2>Lista de Transacciones para el Presupuesto ID: {presupuestoId}</h2>
-            {transaccionesList.length > 0 ? (
-                <table className="min-w-full border-collapse border border-gray-200">
-                    <thead>
-                        <tr>
-                            <th className="border border-gray-300 p-2">Tipo</th>
-                            <th className="border border-gray-300 p-2">Monto</th>
-                            <th className="border border-gray-300 p-2">Descripción</th>
-                            <th className="border border-gray-300 p-2">Fecha</th>
+            <h2>Transacciones para el presupuesto ID: {presupuesto_id}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Monto</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {transactions.map(transaction => (
+                        <tr key={transaction.id}>
+                            <td>{transaction.id}</td>
+                            <td>{transaction.description}</td>
+                            <td>{transaction.monto}</td>
+                            <td>{new Date(transaction.fecha).toLocaleDateString()}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {transaccionesList.map((transaccion) => (
-                            <tr key={transaccion.id}>
-                                <td className="border border-gray-300 p-2">{transaccion.tipo}</td>
-                                <td className="border border-gray-300 p-2">{transaccion.monto}</td>
-                                <td className="border border-gray-300 p-2">{transaccion.descripcion}</td>
-                                <td className="border border-gray-300 p-2">{transaccion.fecha}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                
-            ) : (
-                <p>No hay transacciones disponibles para este presupuesto.</p>
-            )}
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };

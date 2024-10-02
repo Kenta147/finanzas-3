@@ -20,7 +20,10 @@ Route::post('/presupuesto/store', [PresupuestoController::class, 'store'])->name
 
 Route::get('/presupuesto/{id}', [PresupuestoController::class, 'show'])->name('presupuesto.show');
 
-Route::get('/presupuesto/{id}/transacciones', [transaccioneController::class, 'show']);
+
+// Route::get('/presupuesto/{id}/transacciones', [transaccioneController::class, 'show'])->name('transacciones.show');
+// Route::get('/transacciones/{presupuestoId}', [transaccioneController::class, 'show'])->name('transacciones.show');
+Route::get('/transacciones/{id}/transactions', [TransactionController::class, 'show']);
 
 Route::post('/transacciones/store', [transaccioneController::class, 'store'])->name('transacciones.store');
 

@@ -1,16 +1,21 @@
 import React from 'react';
-import ListaTransacciones from '@/Components/ListaTransacciones';
+
 import AgregarTransaccion from '@/Components/AgregarTransacciones.jsx';
 import { usePage } from '@inertiajs/inertia-react';
+import ListaTransacciones from '@/Components/ListaTransacciones';
 
 const Transacciones = () => {
-    const { presupuestoId } = usePage().props; 
+    const pageProps = usePage().props;
+    console.log('Presupuesto ID:', pageProps.presupuestoId);
+   
+    const { presupuestoId } = pageProps; 
 
     return (
         <div>
             <h1>Transacciones del Presupuesto {presupuestoId}</h1>
-            <ListaTransacciones />
-            <AgregarTransaccion presupuestoId={presupuestoId} />  {/* Pasamos el presupuestoId al formulario */}
+           
+            <AgregarTransaccion presupuestoId={presupuestoId} />  
+            <ListaTransacciones presupuestoId={presupuestoId}/>
         </div>
     );
 };
