@@ -4,6 +4,8 @@ import { usePage } from '@inertiajs/inertia-react';
 const ListaPresupuesto = () => {
     const { presupuesto } = usePage().props;
 
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
     const handleButtonClick = (presupuestoId) => {
         window.open(`/presupuesto/${presupuestoId}`, '_blank');
     };
@@ -22,7 +24,7 @@ const ListaPresupuesto = () => {
                     >
                         <div className="text-center">
                             <p className="text-lg font-semibold">
-                                Mes {item.mes}
+                                {meses[item.mes - 1]}
                             </p>
                             <p className="text-sm text-gray-500">
                                 Año {item.ano}

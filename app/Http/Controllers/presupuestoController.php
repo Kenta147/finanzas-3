@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Inertia\Inertia;
 use App\Models\presupuesto;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class presupuestoController extends Controller
      */
     public function index()
     {
-        $presupuestos = presupuesto::all;
+        $presupuestos = presupuesto::all();
+
         return Inertia::render("Components/ListaPresupuesto.jsx", ['presupuestos' => $presupuestos]);
     }
 
@@ -36,7 +38,7 @@ class presupuestoController extends Controller
             'mes' => 'required|integer|min:1|max:12',
             'ano' => 'required|integer',
 
-            
+
         ]);
 
         $presupuesto = Presupuesto::create($request->all());
@@ -48,16 +50,12 @@ class presupuestoController extends Controller
      */
     public function show($id)
     {
-
-   
-    $presupuesto = Presupuesto::findOrFail($id);
-    
-    return Inertia::render('Transacciones', [
-        'presupuesto' => $presupuesto,
-        'presupuestoId' => $presupuesto->id,  // Aquí pasamos el id de forma explícita
-    ]);
-
-
+        $presupuesto = Presupuesto::findOrFail($id);
+        
+        return Inertia::render('Transacciones', [
+            'presupuesto' => $presupuesto,
+            'presupuestoId' => $presupuesto->id,  // Aquí pasamos el id de forma explícita
+        ]);
     }
 
     /**
