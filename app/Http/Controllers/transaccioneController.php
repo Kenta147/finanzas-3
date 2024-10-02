@@ -85,4 +85,11 @@ class transaccioneController extends Controller
         $transaccion->delete();
         return response()->json(null, 204);
     }
+    public function getTransacciones($presupuestoId)
+{
+
+    $transacciones = transaccione::where('presupuesto_id', $presupuestoId)->get();
+
+    return response()->json($transacciones); // Retornar como JSON
+}
 }

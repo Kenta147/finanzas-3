@@ -23,7 +23,8 @@ Route::get('/presupuesto/{id}', [PresupuestoController::class, 'show'])->name('p
 
 // Route::get('/presupuesto/{id}/transacciones', [transaccioneController::class, 'show'])->name('transacciones.show');
 // Route::get('/transacciones/{presupuestoId}', [transaccioneController::class, 'show'])->name('transacciones.show');
-Route::get('/transacciones/{id}/transactions', [TransactionController::class, 'show']);
+Route::get('/transacciones/{presupuestoId}', [transaccioneController::class, 'getTransacciones']);
+Route::get('/transacciones/{id}/transactions', [transaccioneController::class, 'show']);
 
 Route::post('/transacciones/store', [transaccioneController::class, 'store'])->name('transacciones.store');
 
