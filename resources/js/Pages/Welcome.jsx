@@ -9,7 +9,7 @@ export default function Welcome({ presupuesto }) {
         <>
             <Head title="Bienvenido" />
             <div className="container mt-5">
-                <h1 className="text-center mb-4 text-light">Bienvenido a tu Gestor de Presupuestos</h1>
+                <h1 className="text-center mb-4 text-dark">Bienvenido a tu Gestor de Presupuestos</h1>
                 <p className="text-center mb-4 text-light">Aquí puedes agregar y administrar tus presupuestos.</p>
 
                 <div className="card mb-4 bg-dark text-light">

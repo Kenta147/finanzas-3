@@ -1,37 +1,62 @@
 import React from "react";
-import { usePage } from '@inertiajs/inertia-react';
+import { usePage } from "@inertiajs/inertia-react";
 
 const ListaPresupuesto = () => {
     const { presupuesto } = usePage().props;
 
-    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const meses = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+    ];
 
     const handleButtonClick = (presupuestoId) => {
-        window.open(`/presupuesto/${presupuestoId}`, '_blank');
+        window.open(`/presupuesto/${presupuestoId}`, "_blank");
     };
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-gradient-to-r from-green-400 to-blue-500 p-8">
-            <h1 className="text-4xl font-bold mb-8 text-white tracking-wider shadow-lg">
+        <div
+            className="d-flex flex-column align-items-center min-vh-100 bg-gradient"
+            style={{
+                background: "linear-gradient(to right, #38a169, #4299e1)",
+            }}
+        >
+            <h1 className="display-4 text-white mb-4 text-center">
                 Presupuesto
             </h1>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {presupuesto.data.map((item) => (
-                    <button
-                        key={item.id}
-                        className="bg-white text-blue-700 p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:bg-blue-100"
-                        onClick={() => handleButtonClick(item.id)}
-                    >
-                        <div className="text-center">
-                            <p className="text-lg font-semibold">
-                                {meses[item.mes - 1]}
-                            </p>
-                            <p className="text-sm text-gray-500">
-                                Año {item.ano}
-                            </p>
+            <div className="container">
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    {presupuesto.data.map((item) => (
+                        <div className="col" key={item.id}>
+                            <button
+                                className="btn btn-light text-primary p-4 rounded shadow-sm w-100 h-100 d-flex flex-column justify-content-center"
+                                onClick={() => handleButtonClick(item.id)}
+                            >
+                                <div className="text-center">
+                                    <p
+                                        className="h5 font-weight-bold mb-0"
+                                        title={meses[item.mes - 1]}
+                                    >
+                                        {meses[item.mes - 1]}{" "}
+                                        {/* Abreviar si es necesario */}
+                                    </p>
+                                    <p className="small text-muted">
+                                        Año {item.ano}
+                                    </p>
+                                </div>
+                            </button>
                         </div>
-                    </button>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );
