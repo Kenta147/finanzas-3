@@ -25,9 +25,6 @@ Route::get('/presupuesto/{id}', [PresupuestoController::class, 'show'])->name('p
 // Route::get('/transacciones/{presupuestoId}', [transaccioneController::class, 'show'])->name('transacciones.show');
 Route::get('/transacciones/{id}/transactions', [transaccioneController::class, 'show']);
 
-
-Route::get('/transacciones/chart-data', [transaccioneController::class, 'getChartData']);
-
 Route::post('/transacciones/store', [transaccioneController::class, 'store'])->name('transacciones.store');
 
 //Route::resource('presupuesto',PresupuestoController::class);

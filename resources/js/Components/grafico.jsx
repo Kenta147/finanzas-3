@@ -1,51 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { usePage } from '@inertiajs/inertia-react';
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import React, { useEffect, useState } from "react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
-const grafico = () => {
-    const { presupuestoId } = usePage().props;
-    const [transacciones, setTransacciones] = useState([]);
+const TransaccionesPorAno = () => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchTransacciones = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetch(`/presupuesto/${presupuestoId}`);
+                const response = await fetch("http://localhost:8000/api/transacciones"); // URL de tu API de Laravel
                 if (!response.ok) {
-                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                    throw new Error("Error al obtener los datos");
                 }
-                const data = await response.json();
-                setTransacciones(data);
+                const result = await response.json();
+                setData(result);
             } catch (error) {
-                // console.error("Error fetching transacciones:", error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
             }
         };
-    
-        fetchTransacciones();
-    }, [presupuestoId]);
 
-    // Procesar los datos para el gráfico
-    const data = transacciones.reduce((acc, transaccion) => {
-        const tipo = transaccion.tipo;
-        if (!acc[tipo]) {
-            acc[tipo] = { name: tipo, value: 0 };
-        }
-        acc[tipo].value += parseFloat(transaccion.monto);
-        return acc;
-    }, {});
+        fetchData();
+    }, []);
 
-    const chartData = Object.values(data);
+    if (loading) return <p>Cargando datos...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
-        <PieChart width={400} height={400}>
-            <Pie data={chartData} cx={200} cy={200} outerRadius={80} fill="#8884d8" dataKey="value">
-                {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#82ca9d' : '#8884d8'} />
-                ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-        </PieChart>
+        <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="year" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="transactions" fill="#8884d8" />
+            </BarChart>
+        </ResponsiveContainer>
     );
 };
 
-export default grafico;
+export default TransaccionesPorAno;
