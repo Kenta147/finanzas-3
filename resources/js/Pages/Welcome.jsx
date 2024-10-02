@@ -2,6 +2,7 @@ import ListaPresupuesto from '@/Components/ListaPresupuestos';
 import AgregarPresupuesto from '@/Components/AgregarPresupuesto';
 import { Head } from '@inertiajs/inertia-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SimpleGraficoBarras from '@/Components/grafico';
 import AgregarTransaccion from '@/Components/AgregarTransacciones';
 
 export default function Welcome({ presupuesto }) {
@@ -20,7 +21,7 @@ export default function Welcome({ presupuesto }) {
                         <AgregarPresupuesto />
                     </div>
                 </div>
-
+                <SimpleGraficoBarras />
                 <div className="card bg-dark text-light">
                     <div className="card-header bg-secondary">
                         <h2 className="mb-0">Lista de Presupuestos</h2>
